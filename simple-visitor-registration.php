@@ -19,18 +19,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-add_role('viewer',
-	__( 'Viewer' ),
-	array(
-		'read'         => false,   
-		'edit_posts'   => false, 
-		'create_posts'      => false, // Allows user to create new posts
-		'edit_posts'        => false, // Allows user to edit their own posts
-		'edit_others_posts' => false, // Allows user to edit others posts too
-		'publish_posts' => false, // Allows the user to publish posts
-		'manage_categories' => false, // Allows user to manage post categories
-       ) 
-);
+
 
 /**
  * Currently plugin version.
