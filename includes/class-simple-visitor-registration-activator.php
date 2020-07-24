@@ -50,9 +50,9 @@ class Simple_Visitor_Registration_Activator {
 
 	        $sql[] = "CREATE TABLE " . $wpdb->prefix . "visitor_registration_logger (
 	            id mediumint(9) NOT NULL AUTO_INCREMENT, 
-	            entered_at datetime DEFAULT now(), 
+	            entered_at datetime DEFAULT '0000-00-00 00:00:00', 
 	            email varchar(128),
-	            fname varcha mysqr(50),
+	            fname varchar(50),
 	            lname varchar(50),
 	            phone varchar(50),
 	            custom_field_1 varchar(128),
