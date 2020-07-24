@@ -119,7 +119,7 @@ class Simple_Visitor_Registration_Public {
 
   		// If there are google captcha values set, use them to ensure we have a valid capture response
 
-  		if(($GOOGLE_CAPTCHA_SITE_KEY !== '') || ($GOOGLE_CAPTCHA_SITE_KEY !== null)){
+  		if(($GOOGLE_CAPTCHA_SITE_KEY !== '') && ($GOOGLE_CAPTCHA_SITE_KEY !== null) && ($GOOGLE_CAPTCHA_SITE_KEY !== false)){
   			try {
 			    $testCaptcha = $this->verify_captcha(); 
 			} catch (Exception $e) { 
