@@ -54,9 +54,20 @@ class Simple_Visitor_Registration_Shortcodes {
 	        	'buttontext' => 'Register'
 	        ), $atts, 'show_stream_form' );
 
+  		if($VISITOR_REGISTRATION_NONCE = getenv('VISITOR_REGISTRATION_NONCE')){
+		} else {
+		    $VISITOR_REGISTRATION_NONCE = 'we_really_3_need_9()_something_stronghere'; 
+		}
 
   		global $post;
 		ob_start(); 
+		if($GOOGLE_CAPTCHA_SITE_KEY = getenv('GOOGLE_CAPTCHA_SITE_KEY')){
+  		} else {
+  			$options = get_option( 'simple-visitor-registration' ); 
+  			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_attr( $options['google_captcha_site_key'] ) : '';
+  		}
+
+
 		 ?> 
 
 		 <style>
@@ -78,7 +89,7 @@ class Simple_Visitor_Registration_Shortcodes {
 		 		line-height:<?php echo $atts['inputfieldlineheight']; ?>;
 		 		font-size:<?php echo $atts['inputfieldfontsize']; ?>;
 		 	}
-		 	#simplevisitorregistration-userdetails input[type=submit] {
+		 	#simplevisitorregistration-userdetails input[type=submit], #simplevisitorregistration-userdetails button {
 		 		color:<?php echo $atts['buttontextcolor']; ?>;
 		 		padding:<?php echo $atts['buttonpadding']; ?>;
 		 		margin:<?php echo $atts['buttonmargin']; ?>;
@@ -113,10 +124,17 @@ class Simple_Visitor_Registration_Shortcodes {
 			    <?php else: ?>
 			    	<input id="cfield1" type="hidden" name="cfield1"  value='null'>
 			    <?php endif; ?> 
-			    <div class="simplevisitorregistration-form-container" style='margin-top:10px;'> 
-			        <input class="submit_button" type="submit" value="<?php echo $atts['buttontext']; ?>" name="submit"> 
-			    </div>
-			    <?php wp_nonce_field( 'livestream_nonce_go_away', '_nonce' ); ?>
+			    <?php if($GOOGLE_CAPTCHA_SITE_KEY !== ''): ?>
+			    	<div class="g-recaptcha"
+			          data-sitekey="<?php echo $GOOGLE_CAPTCHA_SITE_KEY; ?>"
+			          data-callback="onSubmit"
+			          data-size="invisible"></div> 
+			    <?php endif; ?>
+				    <div class="simplevisitorregistration-form-container" style='margin-top:10px;'> 
+				        <input class="submit_button" type="submit" value="<?php echo $atts['buttontext']; ?>" id="visitor_submit" name="submit"> 
+				    </div>
+				
+			    <?php wp_nonce_field( $VISITOR_REGISTRATION_NONCE, '_nonce' ); ?>
 			</form>
 
 		 <?php

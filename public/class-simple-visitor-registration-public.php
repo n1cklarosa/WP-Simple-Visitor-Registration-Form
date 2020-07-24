@@ -74,19 +74,29 @@ class Simple_Visitor_Registration_Public {
 		global $wp;
 		global $post; 
 
+  		if($GOOGLE_CAPTCHA_SITE_KEY = getenv('GOOGLE_CAPTCHA_SITE_KEY')){
+  		} else {
+  			$options = get_option( $this->plugin_name ); 
+  			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_attr( $options['google_captcha_site_key'] ) : '';
+  		} 
+  		if(($GOOGLE_CAPTCHA_SITE_KEY !== '') && ($GOOGLE_CAPTCHA_SITE_KEY !== null)){
+  			wp_enqueue_script( "recpatcha", 'https://www.google.com/recaptcha/api.js', [], $this->version, false );   
+  		}
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/simple-visitor-registration-public.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( "recpatcha", 'https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit', [], $this->version, false ); 
+		
 
-		$options = get_option( $this->plugin_name ); 
-        $google_captcha_site_key = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_attr( $options['google_captcha_site_key'] ) : '';
-  
+
+  		if($VISITOR_REGISTRATION_NONCE = getenv('VISITOR_REGISTRATION_NONCE')){
+		} else {
+		    $VISITOR_REGISTRATION_NONCE = 'we_really_3_need_9()_something_stronghere'; 
+		}
 
 		wp_localize_script( $this->plugin_name, 
 			'wp_ajax', 
 			array(
 		        'ajax_url' => admin_url( 'admin-ajax.php' ), 
-		        '_nonce' => wp_create_nonce( 'livestream_nonce_go_away' ), 
-      			'google_captcha_site_key' => $google_captcha_site_key
+		        '_nonce' => wp_create_nonce( $VISITOR_REGISTRATION_NONCE ), 
+      			'google_captcha_site_key' => $GOOGLE_CAPTCHA_SITE_KEY
 
 		    ) 
 		); 
@@ -96,14 +106,31 @@ class Simple_Visitor_Registration_Public {
 	public function ajax_register_visitor() {
  
 
-		$email = $_POST['user_email'];
-
+		$email = $_POST['email']; 
 		$fname = stripcslashes($_POST['fname']);
 		$lname = stripcslashes($_POST['lname']); 
 		$email = stripcslashes($_POST['email']); 
 		$custom1 = stripcslashes($_POST['cfield1']);  
-		$phone = stripcslashes($_POST['phone']);  
+		$phone = stripcslashes($_POST['phone']);    
 
+		if($GOOGLE_CAPTCHA_SITE_KEY = getenv('GOOGLE_CAPTCHA_SITE_KEY')){
+  		} else {
+  			$options = get_option( 'simple-visitor-registration' ); 
+  			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_attr( $options['google_captcha_site_key'] ) : '';
+  		}
+
+  		if(($GOOGLE_CAPTCHA_SITE_KEY !== '') || ($GOOGLE_CAPTCHA_SITE_KEY !== null)){
+  			try {
+			    $testCaptcha = $this->verify_captcha(); 
+			} catch (Exception $e) { 
+			    echo json_encode(array('status'=>false, 'message'=>__('Caught exception: '.$e->getMessage())));
+			    die;
+			} 
+  			if($testCaptcha != true){
+  				echo json_encode(array('status'=>false, 'message'=>__('Looks like recaptcha has failed')));
+				die;
+  			}
+  		} 
 		if(strlen($fname) < 2):
 			echo json_encode(array('status'=>false, 'message'=>__('Please enter a valid first name')));
 			die;
@@ -161,6 +188,53 @@ class Simple_Visitor_Registration_Public {
 	    }
 	 
 	    return $output;
+	}
+
+	/* filter to defer google captcha */
+	public function defer_google_captcha_script( $tag, $handle ) {
+
+		if ( 'recpatcha' !== $handle ) {
+			return $tag;
+		}
+
+		// return str_replace( ' src', 'async defer src', $tag ); // defer the script
+		//return str_replace( ' src', ' async src', $tag ); // OR async the script
+		return str_replace( ' src', ' async defer src', $tag ); // OR do both!
+
+	}
+
+	public function verify_captcha(){
+
+
+		if($GOOGLE_CAPTCHA_SECRET_KEY = getenv('GOOGLE_CAPTCHA_SECRET_KEY')){
+		} else { 
+			$options = get_option( 'simple-visitor-registration' ); 
+		    $GOOGLE_CAPTCHA_SECRET_KEY = ( isset( $options['google_captcha_secret_key'] ) && ! empty( $options['google_captcha_secret_key'] ) ) ? esc_attr( $options['google_captcha_secret_key'] ) : ''; 
+		}
+
+		$post_data = http_build_query(
+		    array(
+		        'secret' => $GOOGLE_CAPTCHA_SECRET_KEY,
+		        'response' => $_POST['g-recaptcha-response'],
+		        'remoteip' => $_SERVER['REMOTE_ADDR']
+		    )
+		);
+		$opts = array('http' =>
+		    array(
+		        'method'  => 'POST',
+		        'header'  => 'Content-type: application/x-www-form-urlencoded',
+		        'content' => $post_data
+		    )
+		);
+
+		$context  = stream_context_create($opts);
+		$response = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context);
+		$result = json_decode($response);
+		if (!$result->success) {
+		    throw new Exception('Oops! CAPTCHA verification failed. Please let one of our staff know that something is wrong here', 1);
+		} else {
+			return true;
+		}
 	}
 
 }

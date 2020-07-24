@@ -205,6 +205,7 @@ class Simple_Visitor_Registration {
 		$this->loader->add_action( 'wp_ajax_register_user_front_end', $plugin_public, 'ajax_register_visitor');
    		$this->loader->add_action( 'wp_ajax_nopriv_register_user_front_end', $plugin_public, 'ajax_register_visitor'); 
 		$this->loader->add_action( 'init', $plugin_shortcodes, 'init_simplevisitorregistration_shortcodes', 999 );
+		$this->loader->add_filter( 'script_loader_tag', $plugin_public, 'defer_google_captcha_script', 10, 2  );
 
  
 
