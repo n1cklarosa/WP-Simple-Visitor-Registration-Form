@@ -5,7 +5,7 @@
  * Plugin Name:       Simple Visitor Registration Form 
  * Plugin URI:        https://nicklarosa.net
  * Description:       Add a simple visitor registration form to any wordpress content
- * Version:           1.0.1
+ * Version:           1.0.0
  * Author:            Nick La Rosa
  * Author URI:        https://nicklarosa.net
  * License:           GPL-2.0+
@@ -37,7 +37,7 @@ add_role('viewer',
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'SIMPLE_VISITOR_REGISTRATION_VERSION', '1.0.1' );
+define( 'SIMPLE_VISITOR_REGISTRATION_VERSION', '1.0.0' );
 
 /**
  * The code that runs during plugin activation.

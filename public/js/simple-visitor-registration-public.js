@@ -11,9 +11,7 @@
 		        e.preventDefault();  
 		        process_form();
 		    }); 
-		}
-
-
+		} 
  
     });
 })( jQuery );
@@ -21,7 +19,6 @@
 function onSubmit(token) {
   process_form();
 }
-
 
 function validate_registration_form(event){ 
 	event.preventDefault();
@@ -64,12 +61,12 @@ function process_form(){
     var phone = jQuery('#phone').val();
     var recaptcha = null;
 
+    // if captcha is enabled, ensure we are sending our response
     if(wp_ajax.google_captcha_site_key !== '')
 	{
 		recaptcha = grecaptcha.getResponse();
 	} 
 
-    // var newUserPasswordConfirm = jQuery('#new-user-password-confirm').val();
     jQuery('.register-message').text("Loading....").show();
 
     jQuery.ajax({
@@ -88,7 +85,7 @@ function process_form(){
 		success: function(data){  
 			jQuery('.register-message').text(data.message).show();
 			if (data.status == true){
-				jQuery('#simplevisitorregistration-userdetails').trigger("reset");;
+				jQuery('#simplevisitorregistration-userdetails').trigger("reset");
                 // document.location.href = data.redirecturl;
             } else if (data.status == false){
                 // document.location.href = data.redirecturl;
