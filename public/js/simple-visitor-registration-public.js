@@ -79,6 +79,7 @@ function process_form(){
 			fname : newFirstName,
 			lname : newLastName,
 			email : newUserEmail,
+			security : wp_ajax._nonce,
 			'g-recaptcha-response' : recaptcha,
 			cfield1 : cfield1
 		},

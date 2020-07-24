@@ -18,9 +18,13 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-
-
-
+ 
+if($VISITOR_REGISTRATION_NONCE = getenv('VISITOR_REGISTRATION_NONCE')){
+	define( 'VISITOR_REGISTRATION_NONCE' , $VISITOR_REGISTRATION_NONCE);
+} else {
+	define( 'VISITOR_REGISTRATION_NONCE' , 'we_really_3_need_9()_something_stronghere'); 
+}
+ 
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org

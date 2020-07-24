@@ -6,8 +6,8 @@
  * @link       http://re.markable.com.au
  * @since      1.0.0
  *
- * @package    Nucelsu
- * @subpackage Nucleus/includes
+ * @package    Simple_Visitor_Registration
+ * @subpackage Simple_Visitor_Registration/includes
  */
 class Simple_Visitor_Registration_Shortcodes { 
 
@@ -54,10 +54,7 @@ class Simple_Visitor_Registration_Shortcodes {
 	        	'buttontext' => 'Register'
 	        ), $atts, 'show_stream_form' );
 
-  		if($VISITOR_REGISTRATION_NONCE = getenv('VISITOR_REGISTRATION_NONCE')){
-		} else {
-		    $VISITOR_REGISTRATION_NONCE = 'we_really_3_need_9()_something_stronghere'; 
-		}
+ 
 
   		global $post;
 		ob_start(); 
@@ -134,7 +131,7 @@ class Simple_Visitor_Registration_Shortcodes {
 				        <input class="submit_button" type="submit" value="<?php echo $atts['buttontext']; ?>" id="visitor_submit" name="submit"> 
 				    </div>
 				
-			    <?php wp_nonce_field( $VISITOR_REGISTRATION_NONCE, '_nonce' ); ?>
+			    <?php wp_nonce_field( VISITOR_REGISTRATION_NONCE, '_nonce' ); ?>
 			</form>
 
 		 <?php
