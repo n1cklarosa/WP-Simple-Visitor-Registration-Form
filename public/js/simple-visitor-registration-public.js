@@ -3,7 +3,7 @@
 
     jQuery(document).ready(function($) { 
     	console.log(wp_ajax);
-    	if(wp_ajax.google_captcha_site_key !== '')
+    	if((wp_ajax.google_captcha_site_key !== '')&&(wp_ajax.google_captcha_site_key !== null))
 		{
 	    	onload();
 		} else {

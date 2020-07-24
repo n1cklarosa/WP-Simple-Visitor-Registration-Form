@@ -63,13 +63,21 @@ class Simple_Visitor_Registration_Public {
 	public function enqueue_scripts() {
 		global $wp;
 		global $post; 
+		$GOOGLE_CAPTCHA_SITE_KEY = null;
 
-  		if($GOOGLE_CAPTCHA_SITE_KEY = getenv('GOOGLE_CAPTCHA_SITE_KEY')){
-  		} else {
-  			$options = get_option( $this->plugin_name ); 
-  			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_attr( $options['google_captcha_site_key'] ) : '';
-  		} 
-  		if(($GOOGLE_CAPTCHA_SITE_KEY !== '') && ($GOOGLE_CAPTCHA_SITE_KEY !== null)){
+
+		// check to see if shortcode exists in content, if not, dont enqueue the captcha scripts
+  		$shortcode_found = false;
+		if ( has_shortcode($post->post_content, 'visitor_registration_form') ) {
+
+	  		if($GOOGLE_CAPTCHA_SITE_KEY = getenv('GOOGLE_CAPTCHA_SITE_KEY')){
+	  		} else {
+	  			$options = get_option( $this->plugin_name ); 
+	  			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_attr( $options['google_captcha_site_key'] ) : '';
+	  		} 
+		    $shortcode_found = true;
+		} 
+  		if(($shortcode_found == true) && ($GOOGLE_CAPTCHA_SITE_KEY != '') && ($GOOGLE_CAPTCHA_SITE_KEY != null)){
   			wp_enqueue_script( "recpatcha", 'https://www.google.com/recaptcha/api.js', [], $this->version, false );   
   		}
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/simple-visitor-registration-public.js', array( 'jquery' ), $this->version, false );
