@@ -42,6 +42,7 @@ class Simple_Visitor_Registration_Shortcodes {
 	            'inputfieldwidth' => '100%',
 	            'inputfieldlineheight' => '2rem',
 	            'inputfieldtextcolor' => 'black !important',
+	            'inputfieldbackgroundcolor' => 'transparent !important',
 	            'inputfieldpadding' => '10px 0px !important',
 	            'inputfieldmargin' => '10px 0px !important',
 	            'buttoncolour' => 'black !important',
@@ -77,6 +78,7 @@ class Simple_Visitor_Registration_Shortcodes {
 		 	#simplevisitorregistration-userdetails input[type=text], #simplevisitorregistration-userdetails input[type=email] {
 		 		color:<?php echo $atts['inputfieldtextcolor']; ?>;
 		 		padding:<?php echo $atts['inputfieldpadding']; ?>;
+		 		background-color:<?php echo $atts['inputfieldbackgroundcolor']; ?>;
 		 		margin:<?php echo $atts['inputfieldmargin']; ?>;
 		 		border-top:<?php echo $atts['inputfieldbordertop']; ?>;
 		 		border-right:<?php echo $atts['inputfieldborderright']; ?>;

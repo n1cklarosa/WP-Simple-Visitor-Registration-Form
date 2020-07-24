@@ -32,37 +32,3 @@
 
 })( jQuery ); 
 
-
-jQuery( document ).ready(function() {
-     jQuery('.colorfield').each(function(){
-  
-            jQuery(this).wpColorPicker();
-    });
-});
-
-
-jQuery(document).ready(function($) {	
- 
-	$('#target_livestream').autocomplete({
-		source: function(name, response) {
-			console.log(name)
-			$.ajax({
-				type: 'POST',
-				dataType: 'json',
-				url: '/wp-admin/admin-ajax.php',
-				data: 'action=get_livestreams&name='+name.term,
-				success: function(data) {
-					response(data);
-				}
-			});
-		},
-		select: function (event, ui) {
-	        $('#target_livestream').val(ui.item.label); // display the selected text
-	        $('#target_livestream_id').val(ui.item.value); // save selected id to hidden input
-	        $('#selected_livestream span').html("<a href='/wp-admin/post.php?post="+ui.item.value+"&action=edit' target='_new'>"+ui.item.label+"</a>"); // save selected id to hidden input
-	         return false;
-	    },
-		minLength : 2
-	});
-
-});

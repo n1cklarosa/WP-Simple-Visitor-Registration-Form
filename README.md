@@ -39,6 +39,7 @@ The following shortcode attributes can be used to customise the form without hav
 `inputfieldborderright` -  
 `inputfieldborderbottom` -  
 `inputfieldfontsize` -  
+`inputfieldbackgroundcolor` -  
 `inputfieldwidth'`-  
 `inputfieldlineheight` -  
 `inputfieldtextcolor` -  
