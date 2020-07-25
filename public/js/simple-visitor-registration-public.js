@@ -30,6 +30,7 @@ function validate_registration_form(event){
 	event.preventDefault();
     var container = jQuery('#simplevisitorregistration-form-wrapper'); 
     container.addClass('svr-loading');
+    console.log("starting")
     if (!document.getElementById('fname').value) {
         jQuery('.register-message').text("Please enter a first name").show();
         container.removeClass('svr-loading');
@@ -55,6 +56,7 @@ function validate_registration_form(event){
         container.removeClass('svr-loading');
         return;
     }
+    console.log("ending")
     grecaptcha.execute(); 
 }
 
@@ -73,7 +75,7 @@ function onload() {
 }
 
 function process_form(){
-	
+	console.log("starting to process form");
 	var that = jQuery('#simplevisitorregistration-userdetails');
     var container = jQuery('#simplevisitorregistration-form-wrapper'); 
     var newFirstName = jQuery('#fname').val(); 
@@ -115,7 +117,7 @@ function process_form(){
             } else if (data.status == false){
                 // document.location.href = data.redirecturl;
                 jQuery('.register-message').text(data.message).show();
-                onload();
+                grecaptcha.reset(); 
             }  
 		},
 		error: function(results) {
