@@ -88,7 +88,7 @@ class Simple_Visitor_Registration_Shortcodes {
 		 		line-height:<?php echo $atts['inputfieldlineheight']; ?>;
 		 		font-size:<?php echo $atts['inputfieldfontsize']; ?>;
 		 	}
-		 	#simplevisitorregistration-userdetails input[type=submit], #simplevisitorregistration-userdetails button {
+		 	#simplevisitorregistration-userdetails input[type=submit], #simplevisitorregistration-userdetails button, .svr-reset-button {
 		 		color:<?php echo $atts['buttontextcolor']; ?>;
 		 		padding:<?php echo $atts['buttonpadding']; ?>;
 		 		margin:<?php echo $atts['buttonmargin']; ?>;
@@ -96,8 +96,8 @@ class Simple_Visitor_Registration_Shortcodes {
 		 		width:<?php echo $atts['buttonwidth']; ?>;
 		 	}
 		 </style>
-			<form id="simplevisitorregistration-userdetails" action="login" method="post"> 
-			    <p class="register-message"></p>
+		 <div id="simplevisitorregistration-form-wrapper">
+			<form id="simplevisitorregistration-userdetails" action="login" method="post">  
 			    <input type="hidden" id="post_id" value="<?php echo $post->ID; ?>">
 			    <div class="simplevisitorregistration-form-container">
 				    <label for="username"><?php echo $atts['fnametext']; ?></label>
@@ -123,18 +123,31 @@ class Simple_Visitor_Registration_Shortcodes {
 			    <?php else: ?>
 			    	<input id="cfield1" type="hidden" name="cfield1"  value='null'>
 			    <?php endif; ?> 
+			    <p class="register-message"></p>
 			    <?php if($GOOGLE_CAPTCHA_SITE_KEY !== ''): ?>
 			    	<div class="g-recaptcha"
 			          data-sitekey="<?php echo $GOOGLE_CAPTCHA_SITE_KEY; ?>"
 			          data-callback="onSubmit"
 			          data-size="invisible"></div> 
 			    <?php endif; ?>
+			    <div class="svr-loader-container">
+					<div class="svr-loader">
+						<svg class="svr-ld" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+						  <circle class="svr-ld" cx="50" cy="50" r="45"/>
+						</svg>
+					</div>
+				</div> 
 				    <div class="simplevisitorregistration-form-container" style='margin-top:10px;'> 
 				        <input class="submit_button" type="submit" value="<?php echo $atts['buttontext']; ?>" id="visitor_submit" name="submit"> 
 				    </div>
 				
 			    <?php wp_nonce_field( VISITOR_REGISTRATION_NONCE, '_nonce' ); ?>
 			</form>
+			
+			<div class="simplevisitorregistration-complete-div">
+				
+			</div>
+		</div>
 
 		 <?php
 		$content =  ob_get_contents();
