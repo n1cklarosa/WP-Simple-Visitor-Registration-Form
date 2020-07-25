@@ -97,28 +97,28 @@ class Simple_Visitor_Registration_Shortcodes {
 		 	}
 		 </style>
 		 <div id="simplevisitorregistration-form-wrapper">
-			<form id="simplevisitorregistration-userdetails" action="login" method="post">  
+			<form id="simplevisitorregistration-userdetails" action="login" method="post"  autocomplete="off">  
 			    <input type="hidden" id="post_id" value="<?php echo $post->ID; ?>">
 			    <div class="simplevisitorregistration-form-container">
 				    <label for="username"><?php echo $atts['fnametext']; ?></label>
-				    <input id="fname" type="text" name="fname" placeholder="<?php echo $atts['fnametext']; ?>">
+				    <input id="fname" type="text" name="fname" placeholder="<?php echo $atts['fnametext']; ?>"  autocomplete="off">
 			    </div>
 			    <div class="simplevisitorregistration-form-container">
 				    <label for="password"><?php echo $atts['lnametext']; ?></label>
-				    <input id="lname" type="text" name="lname" placeholder="<?php echo $atts['lnametext']; ?>">
+				    <input id="lname" type="text" name="lname" placeholder="<?php echo $atts['lnametext']; ?>"  autocomplete="off">
 			    </div> 
 			    <div class="simplevisitorregistration-form-container">
 				    <label for="email_address"><?php echo $atts['emailtext']; ?></label>
-				    <input id="email" type="email" name="email" placeholder="<?php echo $atts['emailtext']; ?>">
+				    <input id="email" type="email" name="email" placeholder="<?php echo $atts['emailtext']; ?>"  autocomplete="off">
 			    </div> 
 			    <div class="simplevisitorregistration-form-container">
 				    <label for="phone"><?php echo $atts['phonetext']; ?></label>
-				    <input id="phone" type="text" name="phone" placeholder="<?php echo $atts['phonetext']; ?>">
+				    <input id="phone" type="text" name="phone" placeholder="<?php echo $atts['phonetext']; ?>"  autocomplete="off">
 			    </div> 
 			    <?php if($atts['customfield1'] != null): ?>
 				    <div class="simplevisitorregistration-form-container">
 					    <label for="cfield1"><?php echo $atts['customfield1']; ?></label>
-					    <input id="cfield1" type="text" name="cfield1" placeholder="<?php echo $atts['customfield1']; ?>">
+					    <input id="cfield1" type="text" name="cfield1" placeholder="<?php echo $atts['customfield1']; ?>"  autocomplete="off">
 				    </div> 
 			    <?php else: ?>
 			    	<input id="cfield1" type="hidden" name="cfield1"  value='null'>
