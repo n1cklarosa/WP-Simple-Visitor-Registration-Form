@@ -16,10 +16,33 @@
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) die;
 ?>
-
+<style>
+	p a img{ margin-right:10px; }
+	p a{
+		background-color:white;
+		text-decoration: none;
+		font-size: 13px;
+		line-height: 30pxpx;
+		margin: 0;
+		padding: 10px 10px;
+		cursor: pointer;
+		border-width: 1px;
+		border-style: solid;
+		-webkit-border-radius: 3px;
+		-webkit-appearance: none;
+		border-radius: 3px;
+		white-space: nowrap;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		display:flex;
+		align-items: center;
+  		justify-content: center;
+	}
+</style>
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="wrap">
-    <h2>Visitor Registration <?php esc_attr_e('Import / Export', 'simple-visitor-registration' ); ?></h2> 
+    <h2>Visitor Registration <?php esc_attr_e('Export', 'simple-visitor-registration' ); ?></h2> 
 
-    <a href="<?php echo get_admin_url(); ?>admin.php?page=simple-visitor-registration&export_all_visitor_data">export all visitor information</a>
+    <p style='display:flex;'><a href="<?php echo get_admin_url(); ?>admin.php?page=simple-visitor-registration&export_all_visitor_data"> <img src="<?php echo plugin_dir_url( __FILE__ ) . '../img/export.svg';?>" alt="download" width="22"> Export all visitor information</a></p>
 </div>

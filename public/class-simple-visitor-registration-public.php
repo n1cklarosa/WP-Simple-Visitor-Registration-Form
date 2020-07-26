@@ -10,16 +10,6 @@
  * @subpackage Simple_Visitor_Registration/public
  */
 
-/**
- * The public-facing functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the public-facing stylesheet and JavaScript.
- *
- * @package    Simple_Visitor_Registration
- * @subpackage Simple_Visitor_Registration/public
- * @author     Nick La Rosa <nick@nicklarosa.net>
- */
 class Simple_Visitor_Registration_Public {
 
 	/**
@@ -73,29 +63,31 @@ class Simple_Visitor_Registration_Public {
 	public function enqueue_scripts() {
 		global $wp;
 		global $post; 
+		$GOOGLE_CAPTCHA_SITE_KEY = null;
 
-  		if($GOOGLE_CAPTCHA_SITE_KEY = getenv('GOOGLE_CAPTCHA_SITE_KEY')){
-  		} else {
-  			$options = get_option( $this->plugin_name ); 
-  			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_attr( $options['google_captcha_site_key'] ) : '';
-  		} 
-  		if(($GOOGLE_CAPTCHA_SITE_KEY !== '') && ($GOOGLE_CAPTCHA_SITE_KEY !== null)){
+
+		// check to see if shortcode exists in content, if not, dont enqueue the captcha scripts
+  		$shortcode_found = false;
+		if ( has_shortcode($post->post_content, 'visitor_registration_form') ) {
+
+	  		if($GOOGLE_CAPTCHA_SITE_KEY = getenv('GOOGLE_CAPTCHA_SITE_KEY')){
+	  		} else {
+	  			$options = get_option( $this->plugin_name ); 
+	  			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_attr( $options['google_captcha_site_key'] ) : '';
+	  		} 
+		    $shortcode_found = true;
+		} 
+  		if(($shortcode_found == true) && ($GOOGLE_CAPTCHA_SITE_KEY != '') && ($GOOGLE_CAPTCHA_SITE_KEY != null)){
   			wp_enqueue_script( "recpatcha", 'https://www.google.com/recaptcha/api.js', [], $this->version, false );   
   		}
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/simple-visitor-registration-public.js', array( 'jquery' ), $this->version, false );
 		
 
-
-  		if($VISITOR_REGISTRATION_NONCE = getenv('VISITOR_REGISTRATION_NONCE')){
-		} else {
-		    $VISITOR_REGISTRATION_NONCE = 'we_really_3_need_9()_something_stronghere'; 
-		}
-
 		wp_localize_script( $this->plugin_name, 
 			'wp_ajax', 
 			array(
 		        'ajax_url' => admin_url( 'admin-ajax.php' ), 
-		        '_nonce' => wp_create_nonce( $VISITOR_REGISTRATION_NONCE ), 
+		        '_nonce' => wp_create_nonce( VISITOR_REGISTRATION_NONCE ), 
       			'google_captcha_site_key' => $GOOGLE_CAPTCHA_SITE_KEY
 
 		    ) 
@@ -103,15 +95,21 @@ class Simple_Visitor_Registration_Public {
 	} 
 	  
 
+
+	/** 
+	 * Here we process a form's data using the ajax hooks available in wordpress
+	 *
+	 * @since    1.0.0
+	 */
 	public function ajax_register_visitor() {
  
-
-		$email = $_POST['email']; 
+        check_ajax_referer( VISITOR_REGISTRATION_NONCE, 'security' );
+ 
 		$fname = stripcslashes($_POST['fname']);
 		$lname = stripcslashes($_POST['lname']); 
 		$email = stripcslashes($_POST['email']); 
 		$custom1 = stripcslashes($_POST['cfield1']);  
-		$phone = stripcslashes($_POST['phone']);    
+		$phone = stripcslashes($_POST['phone']);      
 
 		if($GOOGLE_CAPTCHA_SITE_KEY = getenv('GOOGLE_CAPTCHA_SITE_KEY')){
   		} else {
@@ -119,7 +117,9 @@ class Simple_Visitor_Registration_Public {
   			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_attr( $options['google_captcha_site_key'] ) : '';
   		}
 
-  		if(($GOOGLE_CAPTCHA_SITE_KEY !== '') || ($GOOGLE_CAPTCHA_SITE_KEY !== null)){
+  		// If there are google captcha values set, use them to ensure we have a valid capture response
+
+  		if(($GOOGLE_CAPTCHA_SITE_KEY !== '') && ($GOOGLE_CAPTCHA_SITE_KEY !== null) && ($GOOGLE_CAPTCHA_SITE_KEY !== false)){
   			try {
 			    $testCaptcha = $this->verify_captcha(); 
 			} catch (Exception $e) { 
@@ -162,7 +162,7 @@ class Simple_Visitor_Registration_Public {
 		  
 		$newId = $logger->insert_entry($email, $fname, $lname, $phone, $custom1);
 		if($newId):
-			echo json_encode(array('status'=>true,  'message'=>__('Success!')));
+			echo json_encode(array('status'=>true,  'message'=>__('Thank you for signing in. Your details have been registered')));
 		else:
 			echo json_encode(array('status'=>false,  'message'=>__('Sorry, something went wrong here.')));
 		endif;
@@ -190,19 +190,27 @@ class Simple_Visitor_Registration_Public {
 	    return $output;
 	}
 
-	/* filter to defer google captcha */
+	/** 
+	 * filter to defer google captcha when enqueud
+	 *
+	 * @since    1.0.0
+	 */
 	public function defer_google_captcha_script( $tag, $handle ) {
 
 		if ( 'recpatcha' !== $handle ) {
 			return $tag;
-		}
-
-		// return str_replace( ' src', 'async defer src', $tag ); // defer the script
-		//return str_replace( ' src', ' async src', $tag ); // OR async the script
+		} 
 		return str_replace( ' src', ' async defer src', $tag ); // OR do both!
 
 	}
 
+
+
+	/** 
+	 * Send our capctcha response data off to google to verify, throw exception on fail
+	 *
+	 * @since    1.0.0
+	 */
 	public function verify_captcha(){
 
 

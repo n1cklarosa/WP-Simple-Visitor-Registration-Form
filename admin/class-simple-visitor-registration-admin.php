@@ -88,7 +88,7 @@ class Simple_Visitor_Registration_Admin {
 		if(isset($_GET['export_all_visitor_data'])) {   
 			$loggedIn = is_user_logged_in();
 	    	if($loggedIn){ 
-	    		$fName = 'visiitor-registration-'.date("Y-m-d-H-i-s", current_time('timestamp')).'.csv';
+	    		$fName = 'visitor-registration-'.date("Y-m-d-H-i-s", current_time('timestamp')).'.csv';
 		        header('Content-type: text/csv');
 		        header('Content-Disposition: attachment; filename="'.$fName.'"');
 		        header('Pragma: no-cache');

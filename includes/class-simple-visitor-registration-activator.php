@@ -40,7 +40,7 @@ class Simple_Visitor_Registration_Activator {
 	public static function create_db() {
 
 	    global $wpdb;
-	    $table_name = $wpdb->prefix . "livestream_logger";
+	    $table_name = $wpdb->prefix . "visitor_registration_logger";
 	    $plugin_name_db_version = get_option( 'simple-visitor-registration_db_version', '1.0' );
 
 	    if( $wpdb->get_var( "show tables like '{$table_name}'" ) != $table_name ||
@@ -48,11 +48,11 @@ class Simple_Visitor_Registration_Activator {
 
 	        $charset_collate = $wpdb->get_charset_collate(); 
 
-	        $sql[] = "CREATE TABLE " . $wpdb->prefix . "livestream_logger (
+	        $sql[] = "CREATE TABLE " . $wpdb->prefix . "visitor_registration_logger (
 	            id mediumint(9) NOT NULL AUTO_INCREMENT, 
 	            entered_at datetime DEFAULT '0000-00-00 00:00:00', 
 	            email varchar(128),
-	            fname varcha mysqr(50),
+	            fname varchar(50),
 	            lname varchar(50),
 	            phone varchar(50),
 	            custom_field_1 varchar(128),

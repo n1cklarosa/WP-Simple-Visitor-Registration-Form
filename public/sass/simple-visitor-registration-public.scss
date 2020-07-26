@@ -1,6 +1,84 @@
+#simplevisitorregistration-form-wrapper{
 
-.simplevisitorregistration-form-container{
-	input{
-		box-sizing:border-box;
+	.svr-loader-container{
+		max-height:0;
+		overflow-y:hidden;
+		transition:max-height 0.5s;
+		.svr-loader {   
+			text-align:center; 
+		}
 	}
+	&.svr-loading{ 
+		.svr-loader-container{
+			max-height:400px;
+		} 
+		input[type=text],input[type=email]{
+			opacity:0.6;
+		}
+	}
+
+
+	.simplevisitorregistration-form-container{
+		input{
+			box-sizing:border-box;
+		} 
+	}
+
+	.simplevisitorregistration-complete-div{
+		display:none;
+		text-align:center;
+	}
+	.svr-reset-button{
+		text-decoration:none;
+	}
+}
+ 
+
+svg.svr-ld {
+	width:30px;
+  animation: 2s linear infinite svg-animation;
+  max-width: 100px;
+}
+
+// SVG animation.
+@keyframes svg-animation {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg)
+  }
+}
+
+// Circle styles.
+circle.svr-ld {
+  animation: 1.4s ease-in-out infinite both circle-animation;
+  display: block;
+  fill: transparent;
+  stroke: #2f3d4c;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 280;
+  stroke-width: 10px;
+  transform-origin: 50% 50%;
+}
+
+// Circle animation.
+@keyframes circle-animation {
+  0%,
+  25% {
+    stroke-dashoffset: 280;
+    transform: rotate(0);
+  }
+  
+  50%,
+  75% {
+    stroke-dashoffset: 75;
+    transform: rotate(45deg);
+  }
+  
+  100% {
+    stroke-dashoffset: 280;
+    transform: rotate(360deg);
+  }
 }
