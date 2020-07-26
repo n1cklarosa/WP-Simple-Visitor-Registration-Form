@@ -37,6 +37,8 @@ if($GOOGLE_CAPTCHA_SECRET_KEY = getenv('GOOGLE_CAPTCHA_SECRET_KEY')){
 <div class="wrap">
     <h2>Google ReCaptcha <?php esc_attr_e('Options', 'simple-visitor-registration' ); ?></h2>
 
+    <p>The form is compatible with the invisible method of google reCAPTCHA v2. You can obtain your site and sectret keys <a href="https://www.google.com/recaptcha/intro/v3.html" target="_new">here</a>.</p>
+
     <form method="post" name="<?php echo $this->plugin_name; ?>" action="options.php">
     <?php 
         

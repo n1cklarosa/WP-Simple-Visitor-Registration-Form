@@ -2,13 +2,7 @@
 	'use strict'; 
 
     jQuery(document).ready(function($) { 
-
-        // $(".svr-reset-button").on("click", function(e){
-        //     e.preventDefault();
-        //     jQuery(".simplevisitorregistration-complete-div").slideUp();
-        //     jQuery('#simplevisitorregistration-userdetails').slideDown();
-        // })
-    	// console.log(wp_ajax);
+ 
     	if((wp_ajax.google_captcha_site_key !== '')&&(wp_ajax.google_captcha_site_key !== null))
 		{
 	    	onload();
@@ -29,8 +23,7 @@ function onSubmit(token) {
 function validate_registration_form(event){ 
 	event.preventDefault();
     var container = jQuery('#simplevisitorregistration-form-wrapper'); 
-    container.addClass('svr-loading');
-    console.log("starting")
+    container.addClass('svr-loading'); 
     if (!document.getElementById('fname').value) {
         jQuery('.register-message').text("Please enter a first name").show();
         container.removeClass('svr-loading');
@@ -55,8 +48,7 @@ function validate_registration_form(event){
         jQuery('.register-message').text("Please ensure all fields are filled out correctly").show();
         container.removeClass('svr-loading');
         return;
-    }
-    console.log("ending")
+    } 
     grecaptcha.execute(); 
 }
 
@@ -74,8 +66,7 @@ function onload() {
   element.onclick = validate_registration_form;
 }
 
-function process_form(){
-	console.log("starting to process form");
+function process_form(){ 
 	var that = jQuery('#simplevisitorregistration-userdetails');
     var container = jQuery('#simplevisitorregistration-form-wrapper'); 
     var newFirstName = jQuery('#fname').val(); 
@@ -106,18 +97,18 @@ function process_form(){
 			'g-recaptcha-response' : recaptcha,
 			cfield1 : cfield1
 		},
-		success: function(data){  
-			// jQuery('.register-message').text(data.message).show();
+		success: function(data){   
 
             container.removeClass('svr-loading');
 			if (data.status == true){
 				jQuery('#simplevisitorregistration-userdetails').trigger("reset").slideUp();;
                 jQuery(".simplevisitorregistration-complete-div").html(data.message + "<br><br><a href='"+window.location.href+"' class='svr-reset-button'>Add another guest</button>").slideDown();
-                // document.location.href = data.redirecturl;
-            } else if (data.status == false){
-                // document.location.href = data.redirecturl;
+            } else if (data.status == false){ 
                 jQuery('.register-message').text(data.message).show();
-                grecaptcha.reset(); 
+                if(wp_ajax.google_captcha_site_key !== '')
+                {
+                    grecaptcha.reset(); 
+                }
             }  
 		},
 		error: function(results) {
