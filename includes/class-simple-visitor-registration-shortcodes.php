@@ -52,7 +52,9 @@ class Simple_Visitor_Registration_Shortcodes {
 	            'buttonwidth' => '100% !important',
 	            'errortextcolor' => 'white !important',
 	            'customfield1' => null, 
-	        	'buttontext' => 'Register'
+				'buttontext' => 'Register',
+				'customlink' => null,
+				'customlinktext' => null
 	        ), $atts, 'show_stream_form' );
 
  
@@ -64,7 +66,7 @@ class Simple_Visitor_Registration_Shortcodes {
   			$options = get_option( 'simple-visitor-registration' ); 
   			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_attr( $options['google_captcha_site_key'] ) : '';
   		}
-
+		  var_dump($atts);
 
 		 ?> 
 
@@ -139,14 +141,17 @@ class Simple_Visitor_Registration_Shortcodes {
 				</div> 
 				    <div class="simplevisitorregistration-form-container" style='margin-top:10px;'> 
 				        <input class="submit_button" type="submit" value="<?php echo $atts['buttontext']; ?>" id="visitor_submit" name="submit"> 
-				    </div>
-				
+				    </div> 
 			    <?php wp_nonce_field( VISITOR_REGISTRATION_NONCE, '_nonce' ); ?>
 			</form>
 			
-			<div class="simplevisitorregistration-complete-div">
-				
+			<div class="simplevisitorregistration-complete-div" style="display:none;">
+				<a href="<?php the_permalink(); ?>" class="svr-reset-button">Add Guest</a>
+				<?php if(($atts['customlink'] != null) && ($atts['customlinktext'] != null)): ?>
+					<a class='svr-reset-button' href="<?php echo $atts['customlink']; ?>"><?php echo $atts['customlinktext']; ?></a>
+				<?php endif; ?>
 			</div>
+			 
 		</div>
 
 		 <?php

@@ -102,7 +102,9 @@ function process_form(){
             container.removeClass('svr-loading');
 			if (data.status == true){
 				jQuery('#simplevisitorregistration-userdetails').trigger("reset").slideUp();;
-                jQuery(".simplevisitorregistration-complete-div").html(data.message + "<br><br><a href='"+window.location.href+"' class='svr-reset-button'>Add another guest</button>").slideDown();
+                // jQuery(".simplevisitorregistration-complete-div").html(data.message + "<br><br><a href='"+window.location.href+"' class='svr-reset-button'>Add another guest</button>").slideDown();
+                jQuery(".simplevisitorregistration-complete-div").css(display, 'flex').slideDown();
+              
             } else if (data.status == false){ 
                 jQuery('.register-message').text(data.message).show();
                 if(wp_ajax.google_captcha_site_key !== '')

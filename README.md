@@ -26,12 +26,20 @@ This plugin will provide the ability to add a form with the following shortcode 
 
 `[visitor_registration_form]`
 
+### Adding a custom link to confirmation
+
+By default, the form will return the option to add a guest once a the form has been submitted. You may want to add a link to a menu or location policies upon the form being submitted. I have set up a few shortcode attributes you can use to make this happen
+
+Example with a custom link showing "View Menu" along side the add a guest. 
+
+`[visitor_registration_form customlink="/view-menu" customlinktext="View Menu"]`
+
 #### Customise
 
 The following shortcode attributes can be used to customise the form without having to alter your theme. A custom field can also be added using the 'customfield1' option
 
-fnametext - Customise the First Name placeholder text lnametext - Customise the Last Name placeholder text emailtext - Customise the Email Address placeholder text phonetext - Customise the Phone Number placeholder text 
-inputfieldbordertop - Text fields top border css properties inputfieldborderleft - Text fields left border css properties inputfieldborderright - Text fields right border css properties inputfieldborderbottom - Text fields bottom border css properties inputfieldfontsize - Text field font size css properties inputfieldbackgroundcolor - Text fields background color css properties inputfieldwidth'- Text fields width value css properties inputfieldlineheight - Text field line height css properties inputfieldtextcolor - Text field font color css properties inputfieldpadding - Text field padding css properties inputfieldmargin - Text field margin css properties buttoncolour - Button font background color css properties buttontextcolor - Button font color css properties buttonpadding - Button padding css properties buttonmargin - Button margin css properties buttonwidth - Button width css properties errortextcolor - Error text color css properties customfield1 - Name of an extra field eg. Room Number buttontext - Customise the Register Button Text
+fnametext - Customise the First Name placeholder textlnametext - Customise the Last Name placeholder textemailtext - Customise the Email Address placeholder textphonetext - Customise the Phone Number placeholder text 
+inputfieldbordertop - Text fields top border css propertiesinputfieldborderleft - Text fields left border css propertiesinputfieldborderright - Text fields right border css propertiesinputfieldborderbottom - Text fields bottom border css propertiesinputfieldfontsize - Text field font size css propertiesinputfieldbackgroundcolor - Text fields background color css propertiesinputfieldwidth'- Text fields width value css propertiesinputfieldlineheight - Text field line height css propertiesinputfieldtextcolor - Text field font color css propertiesinputfieldpadding - Text field padding css propertiesinputfieldmargin - Text field margin css propertiesbuttoncolour - Button font background color css propertiesbuttontextcolor - Button font color css propertiesbuttonpadding - Button padding css propertiesbuttonmargin - Button margin css propertiesbuttonwidth - Button width css propertieserrortextcolor - Error text color css propertiescustomfield1 - Name of an extra field eg. Room Numberbuttontext - Customise the Register Button Text
 
 `[visitor_registration_form fnametext="First Name" lnametext="Surname" emailtext="Email Address" phonetext="Phone Number" customfield1="Company" inputfieldbordertop="0px solid black !important" inputfieldborderleft="0px solid black !important" inputfieldborderright="0px solid black !important" inputfieldborderbottom="2px solid black !important" inputfieldwidth="100%" inputfieldtextcolour="#000 !important" inputfieldpadding="10px 20px !important" inputfieldmargin="10px 0px !important" buttoncolour="#000 !important" buttontextcolour="#fff !important" buttonpadding="20px 20px !important" buttonmargin="10px 0px !important" buttonwidth="100% !important" buttontext="Register" errortextcolor="#fff !important"]`
  
