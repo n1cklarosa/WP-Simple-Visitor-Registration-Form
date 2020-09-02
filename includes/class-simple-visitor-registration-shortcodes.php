@@ -65,10 +65,7 @@ class Simple_Visitor_Registration_Shortcodes {
   		} else {
   			$options = get_option( 'simple-visitor-registration' ); 
   			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_attr( $options['google_captcha_site_key'] ) : '';
-  		}
-		  var_dump($atts);
-
-		 ?> 
+  		}  ?> 
 
 		 <style>
 		 	#simplevisitorregistration-userdetails p {
