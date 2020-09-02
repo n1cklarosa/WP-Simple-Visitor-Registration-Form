@@ -5,7 +5,7 @@
  * Plugin Name:       Corona Virus (COVID-19) Simple Visitor Registration Form 
  * Plugin URI:        https://nicklarosa.net
  * Description:       Add a simple visitor registration form to any wordpress content
- * Version:           1.0.1
+ * Version:           1.0.0
  * Author:            Nick La Rosa
  * Author URI:        https://nicklarosa.net
  * License:           GPL-2.0+
@@ -28,7 +28,7 @@ if($VISITOR_REGISTRATION_NONCE = getenv('VISITOR_REGISTRATION_NONCE')){
 /**
  * Current plugin version. 
  */
-define( 'SIMPLE_VISITOR_REGISTRATION_VERSION', '1.0.1' );
+define( 'SIMPLE_VISITOR_REGISTRATION_VERSION', '1.0.0' );
 
 /**
  * The code that runs during plugin activation.
