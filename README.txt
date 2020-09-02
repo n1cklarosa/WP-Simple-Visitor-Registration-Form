@@ -10,34 +10,48 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Add a simple visitor registration form to any wordpress content
 
-== Description ==
+# WP-Simple-Visitor-Registration-Form
 
-Add a simple visitor registration form to any wordpress content
-
-== Installation ==
-
-This section describes how to install the plugin and get it working.
-
-e.g.
+### Installation
 
 1. Upload project to your plugins folder in its own directory. eg. to the `/wp-content/plugins/WP-simple-visitor-registration/` directory.
 2. Head to your plugin screen to activate it
 
-== Frequently Asked Questions ==
+### Google ReCAPTCHA
 
-= Can the form use google reCAPTCHA? =
+Once the plugin has been activated, you will see a new admin section titled "Simple Visitor Registration", with a sub menu "Visitor Registration reCAPTCHA". Enter your Google ReCaptcha Site Key and Secret into the relevant fields
 
-Yes, set up the approriate fields in the new settings field
+#### Security
 
-== Screenshots ==
+ReCaptcha keys can be stored as environment variables rather than saving them to the database.
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+e.g.
 
-== Changelog ==
+```
+putenv("GOOGLE_CAPTCHA_SITE_KEY=foobar");
+putenv("GOOGLE_CAPTCHA_SECRET_KEY=foobar");
+```
 
-= 1.0 =
-* Initial Version
+### Shortcode
+
+This plugin will provide the ability to add a form with the following shortcode from any WYSIWYG editor in wordpress. This will use some default styling, however, styles can be altered with a little CSS using the attributes found under "Customise".
+
+`[visitor_registration_form]`
+
+### Adding a custom link to confirmation
+
+By default, the form will return the option to add a guest once a the form has been submitted. You may want to add a link to a menu or location policies upon the form being submitted. I have set up a few shortcode attributes you can use to make this happen
+
+Example with a custom link showing "View Menu" along side the add a guest. 
+
+`[visitor_registration_form customlink="/view-menu" customlinktext="View Menu"]`
+
+#### Customise
+
+The following shortcode attributes can be used to customise the form without having to alter your theme. A custom field can also be added using the 'customfield1' option
+
+fnametext - Customise the First Name placeholder textlnametext - Customise the Last Name placeholder textemailtext - Customise the Email Address placeholder textphonetext - Customise the Phone Number placeholder text 
+inputfieldbordertop - Text fields top border css propertiesinputfieldborderleft - Text fields left border css propertiesinputfieldborderright - Text fields right border css propertiesinputfieldborderbottom - Text fields bottom border css propertiesinputfieldfontsize - Text field font size css propertiesinputfieldbackgroundcolor - Text fields background color css propertiesinputfieldwidth'- Text fields width value css propertiesinputfieldlineheight - Text field line height css propertiesinputfieldtextcolor - Text field font color css propertiesinputfieldpadding - Text field padding css propertiesinputfieldmargin - Text field margin css propertiesbuttoncolour - Button font background color css propertiesbuttontextcolor - Button font color css propertiesbuttonpadding - Button padding css propertiesbuttonmargin - Button margin css propertiesbuttonwidth - Button width css propertieserrortextcolor - Error text color css propertiescustomfield1 - Name of an extra field eg. Room Numberbuttontext - Customise the Register Button Text
+
+`[visitor_registration_form fnametext="First Name" lnametext="Surname" emailtext="Email Address" phonetext="Phone Number" customfield1="Company" inputfieldbordertop="0px solid black !important" inputfieldborderleft="0px solid black !important" inputfieldborderright="0px solid black !important" inputfieldborderbottom="2px solid black !important" inputfieldwidth="100%" inputfieldtextcolour="#000 !important" inputfieldpadding="10px 20px !important" inputfieldmargin="10px 0px !important" buttoncolour="#000 !important" buttontextcolour="#fff !important" buttonpadding="20px 20px !important" buttonmargin="10px 0px !important" buttonwidth="100% !important" buttontext="Register" errortextcolor="#fff !important"]`
+ 

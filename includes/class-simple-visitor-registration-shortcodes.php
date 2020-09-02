@@ -24,7 +24,7 @@ class Simple_Visitor_Registration_Shortcodes {
 
 
 	/**
-	 * Build grid element needed to pulls grid via javascript
+	 * The  function for the [visitor_registration_form] shortcode - will display our form using supplied attributes
 	 */
   	public function show_vistor_registration_form($atts) { 
 
