@@ -143,7 +143,7 @@ class Simple_Visitor_Registration_Shortcodes {
 			</form>
 			
 			<div class="simplevisitorregistration-complete-div" style="display:none;">
-				<a href="<?php the_permalink(); ?>" class="svr-reset-button">Add Guest</a>
+				<a href="<?php the_permalink(); ?>" class="svr-reset-button" style='margin-left:10px;margin-right:10px'>Add Guest</a>
 				<?php if(($atts['customlink'] != null) && ($atts['customlinktext'] != null)): ?>
 					<a class='svr-reset-button' href="<?php echo $atts['customlink']; ?>"><?php echo $atts['customlinktext']; ?></a>
 				<?php endif; ?>
