@@ -123,7 +123,7 @@ class Simple_Visitor_Registration_Admin {
 
 		        $file = fopen('php://output', 'w');
 
-		        fputcsv($file, array('email', 'first_name', 'last_name', 'phone', 'entered_at', 'cutom_field'));
+		        fputcsv($file, array('email', 'first_name', 'last_name', 'phone', 'entered_at', 'custom_field'));
 
 		       	$entries = $logger->return_all_entries();  
 
