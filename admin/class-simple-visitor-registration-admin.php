@@ -72,16 +72,43 @@ class Simple_Visitor_Registration_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
- 
- 
+	public function enqueue_scripts() { 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/simple-visitor-registration-admin.js', array(  'jquery' ), $this->version, false, true );
 
+		wp_localize_script( $this->plugin_name, 
+			'wp_ajax', 
+			array(
+		        'ajax_url' => admin_url( 'admin-ajax.php' ), 
+		        '_nonce' => wp_create_nonce( VISITOR_REGISTRATION_NONCE )
+
+		    ) 
+		); 
 	}
 
  
 
 
+	public function func_delete_all_visitor_registration_details() {
+		check_ajax_referer( VISITOR_REGISTRATION_NONCE, 'security' );
+
+
+		$logger = new Simple_Visitor_Registration_Logger;
+
+		try {
+			// run your code here
+			$deleted = $logger->delete_all_entries();
+			echo json_encode(array('status'=>true, 'deleted'=>$deleted,  'message'=>__('All entries have been deleted')));
+			exit();
+		}
+		catch (exception $e) {
+			echo json_encode(array('status'=>failed,  'message'=>__(e)));
+			exit();
+		}
+
+		
+	}
+	
+	
 	public function func_export_visitor_registration_details() {
 		$logger = new Simple_Visitor_Registration_Logger;
 
@@ -116,18 +143,7 @@ class Simple_Visitor_Registration_Admin {
 		} 
  
 	}
-
-	public function search_users_for_id($users, $id){
-		foreach ($users as $user) {
-			if($user->ID == $id){
-				return $user;
-			}
-		}
-		return null;
-
-	}
-
-
+ 
 
 	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
@@ -161,6 +177,8 @@ class Simple_Visitor_Registration_Admin {
 
 	    add_submenu_page( $this->plugin_name, 'Entries', 'Entries', 'manage_options', $this->plugin_name, array($this, 'display_plugin_import_export_page'));
 	    add_submenu_page( $this->plugin_name, 'Visitor Registration reCAPTCHA', 'Visitor Registration reCAPTCHA', 'manage_options', $this->plugin_name.'-captcha', array($this, 'display_plugin_captcha_setup_page')
+		);
+		add_submenu_page( $this->plugin_name, 'Help', 'Visitor Registration Help', 'manage_options', $this->plugin_name.'-help', array($this, 'display_plugin_help_page')
 	    );
 
 	}
@@ -183,7 +201,7 @@ class Simple_Visitor_Registration_Admin {
 	}
 
 	/**
-	 * Render the settings page for this plugin.
+	 * Render the recaptcha settings page for this plugin.
 	 *
 	 * @since    1.0.0
 	 */
@@ -192,14 +210,28 @@ class Simple_Visitor_Registration_Admin {
 	    include_once( 'partials/' . $this->plugin_name . '-admin-display.php' );
 
 	}
+
+
 	/**
-	 * Render the settings page for this plugin.
+	 * Render the export page for this plugin.
 	 *
 	 * @since    1.0.0
 	 */
 	public function display_plugin_import_export_page() {
 
 	    include_once( 'partials/' . $this->plugin_name . '-admin-import-export-display.php' );
+
+	}
+
+
+	/**
+	 * Render the help page for this plugin.
+	 *
+	 * @since    1.0.0
+	 */
+	public function display_plugin_help_page() {
+
+	    include_once( 'partials/' . $this->plugin_name . '-admin-help-display.php' );
 
 	}
 

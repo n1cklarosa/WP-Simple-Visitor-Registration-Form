@@ -171,7 +171,7 @@ class Simple_Visitor_Registration {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' ); 
 	    $this->loader->add_action( 'admin_init', $plugin_admin, 'func_export_visitor_registration_details' );
 		$this->loader->add_action( 'init', $plugin_shortcodes, 'init_simplevisitorregistration_shortcodes', 999 );
-	 
+		$this->loader->add_action( 'wp_ajax_delete_all_database_entries', $plugin_admin, 'func_delete_all_visitor_registration_details');
    
 	    // Save/Update our plugin options
 	    $this->loader->add_action('admin_init', $plugin_admin, 'options_update');
@@ -182,8 +182,7 @@ class Simple_Visitor_Registration {
 	    // Add Settings link to the plugin
 	    $plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' );
 
-	    $this->loader->add_filter( 'plugin_action_links_' . $plugin_basename, $plugin_admin, 'add_action_links' );
-
+	    $this->loader->add_filter( 'plugin_action_links_' . $plugin_basename, $plugin_admin, 'add_action_links' ); 
 
 	}
 

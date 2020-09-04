@@ -13,8 +13,7 @@ class Simple_Visitor_Registration_Shortcodes {
 
   	public $options;
 
-	public function __construct() { 
-		// $this->options = get_option('nucleus');  
+	public function __construct() {   
 	}
 
 

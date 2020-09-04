@@ -55,9 +55,7 @@ class Simple_Visitor_Registration_Logger {
 	}
 
 	/**
-	 * Lookup entry add if not found
-	 *
-	 * Long Description.
+	 * Lookup entry add if not found 
 	 *
 	 * @since    1.0.0
 	 */
@@ -77,9 +75,7 @@ class Simple_Visitor_Registration_Logger {
 	}
 
 	/**
-	 * Lookup entry add if not found
-	 *
-	 * Long Description.
+	 * Return all entries in the database 
 	 *
 	 * @since    1.0.0
 	 */
@@ -98,9 +94,7 @@ class Simple_Visitor_Registration_Logger {
 
 
 	/**
-	 * Add entry to database
-	 *
-	 * Long Description.
+	 * Add entry to database 
 	 *
 	 * @since    1.0.0
 	 */
@@ -127,40 +121,14 @@ class Simple_Visitor_Registration_Logger {
 	}
 
 
-	// public function update_row_in_db($id) {
-	//     global $wpdb;
+	 
 
-	//     $table = $wpdb->prefix . 'visitor_registration_logger';
-	//     $date = date('Y-m-d H:i:s', strtotime('now'));
-
-	//     $data = array(
-	//         'last_seen'     => $date
-	//     );
-	//     $format = array( '%s' );
-	//     $where = array(
-	//         'id' => $id
-	//     );
-	//     $where_format = array(
-	//         '%d'
-	//     );
-
-	//     return $wpdb->update( $table, $data, $where, $format, $where_format );
-
-	// }
-
-	public function delete_row_from_db() {
+	public function delete_all_entries() {
 	    global $wpdb;
 
-	    $table = $wpdb->prefix . 'visitor_registration_logger';
+	    $table = $wpdb->prefix . 'visitor_registration_logger'; 
 
-	    $where = array(
-	        'ID' => 1
-	    );
-	    $where_format = array(
-	        '%d'
-	    );
-
-	    return $wpdb->delete( $table, $where, $where_format );
+	    return  $wpdb->query("TRUNCATE TABLE $table");
 
 	}
 

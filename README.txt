@@ -1,57 +1,50 @@
-=== Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
+=== Simple Visitor Registration Form ===
+Contributors: nicklarosa
 Donate link: https://nicklarosa.net
 Tags: registration
 Requires at least: 5.0
-Tested up to: 5.4
-Stable tag: 5.0
+Tested up to: 5.5
+Stable tag: 5.3
+Requires PH: 7.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Add a simple visitor registration form to any wordpress content
+Add a simple visitor registration form to any wordpress site.
 
-# WP-Simple-Visitor-Registration-Form
+== Description ==
 
-### Installation
+There are loads of great full featured form plugins available for wordpress. Some take a little getting to know in order to get the most out of them. This plugin is not one of those, it is something simple to help physical venue's create a visitor registration form with the use of a single shortcode.
 
-1. Upload project to your plugins folder in its own directory. eg. to the `/wp-content/plugins/WP-simple-visitor-registration/` directory.
-2. Head to your plugin screen to activate it
+Once a patron of a venue has filled out the form, they have the option to add a new guest or visit a customisable link of the venue's choice. Entries can then be exported to CSV by the Wordpress administrator with exact date along side the details added into the form.
 
-### Google ReCAPTCHA
+**Features**
 
-Once the plugin has been activated, you will see a new admin section titled "Simple Visitor Registration", with a sub menu "Visitor Registration reCAPTCHA". Enter your Google ReCaptcha Site Key and Secret into the relevant fields
+- Simple shortcode to instantly create a form with First and Last Name, phone and Email
+- Add a custom form field, eg. "Destination Room Number" or any other information that might be handy.
+- Customise view using attributes- Google Recaptcha
 
-#### Security
+**How to Contribute**
 
-ReCaptcha keys can be stored as environment variables rather than saving them to the database.
+If you want to contribute to Simple Visitor Registration Form, you can [fork the GitHub repository](https://github.com/n1cklarosa/WP-Simple-Visitor-Registration-Form) - all pull requests will be reviewed and merged if they fit into the goals for the plugin.
 
-e.g.
+== Installation ==
 
-```
-putenv("GOOGLE_CAPTCHA_SITE_KEY=foobar");
-putenv("GOOGLE_CAPTCHA_SECRET_KEY=foobar");
-```
+Upload the Simple Visitor Registration Form plugin to your wordpress website, activate it, and then use the shortcode to build your registraion form.
 
-### Shortcode
+== Frequently Asked Questions ==
 
-This plugin will provide the ability to add a form with the following shortcode from any WYSIWYG editor in wordpress. This will use some default styling, however, styles can be altered with a little CSS using the attributes found under "Customise".
+= How do I enable Google ReCaptcha? =
 
-`[visitor_registration_form]`
+Once the plugin has been activated, you will see a new admin section titled "Simple Visitor Registration", with a sub menu "Visitor Registration reCAPTCHA". Enter your Google ReCaptcha Site Key and Secret into the relevant fields and save. Your form shuold now be using Captcha. Please not this only compatible iwth v2 of ReCaptcha.
 
-### Adding a custom link to confirmation
+= How can I add another link to the confirmation page? =
 
-By default, the form will return the option to add a guest once a the form has been submitted. You may want to add a link to a menu or location policies upon the form being submitted. I have set up a few shortcode attributes you can use to make this happen
+This can be achieved with shortcode attributes atrrbiutes. Here is an example shortcode with a custom link showing "View Menu" along side the "add a guest" link. `[visitor_registration_form customlink="/view-menu" customlinktext="View Menu"]`
 
-Example with a custom link showing "View Menu" along side the add a guest. 
+= How do I use the shortcode? =
 
-`[visitor_registration_form customlink="/view-menu" customlinktext="View Menu"]`
+The shortcode to display form is `[visitor_registration_form]`. Place is the content of any post or page.
 
-#### Customise
+A complete version of the shortcode looks like the following:
 
-The following shortcode attributes can be used to customise the form without having to alter your theme. A custom field can also be added using the 'customfield1' option
-
-fnametext - Customise the First Name placeholder textlnametext - Customise the Last Name placeholder textemailtext - Customise the Email Address placeholder textphonetext - Customise the Phone Number placeholder text 
-inputfieldbordertop - Text fields top border css propertiesinputfieldborderleft - Text fields left border css propertiesinputfieldborderright - Text fields right border css propertiesinputfieldborderbottom - Text fields bottom border css propertiesinputfieldfontsize - Text field font size css propertiesinputfieldbackgroundcolor - Text fields background color css propertiesinputfieldwidth'- Text fields width value css propertiesinputfieldlineheight - Text field line height css propertiesinputfieldtextcolor - Text field font color css propertiesinputfieldpadding - Text field padding css propertiesinputfieldmargin - Text field margin css propertiesbuttoncolour - Button font background color css propertiesbuttontextcolor - Button font color css propertiesbuttonpadding - Button padding css propertiesbuttonmargin - Button margin css propertiesbuttonwidth - Button width css propertieserrortextcolor - Error text color css propertiescustomfield1 - Name of an extra field eg. Room Numberbuttontext - Customise the Register Button Text
-
-`[visitor_registration_form fnametext="First Name" lnametext="Surname" emailtext="Email Address" phonetext="Phone Number" customfield1="Company" inputfieldbordertop="0px solid black !important" inputfieldborderleft="0px solid black !important" inputfieldborderright="0px solid black !important" inputfieldborderbottom="2px solid black !important" inputfieldwidth="100%" inputfieldtextcolour="#000 !important" inputfieldpadding="10px 20px !important" inputfieldmargin="10px 0px !important" buttoncolour="#000 !important" buttontextcolour="#fff !important" buttonpadding="20px 20px !important" buttonmargin="10px 0px !important" buttonwidth="100% !important" buttontext="Register" errortextcolor="#fff !important"]`
- 
+`[visitor_registration_form fnametext="First Name" lnametext="Surname" emailtext="Email Address" phonetext="Phone Number" customfield1="Room Number" inputfieldbordertop="0px solid black !important" inputfieldborderleft="0px solid black !important" inputfieldborderright="0px solid black !important" inputfieldborderbottom="2px solid black !important" inputfieldwidth="100%" inputfieldtextcolour="#000 !important" inputfieldpadding="10px 20px !important" inputfieldmargin="10px 0px !important" buttoncolour="#000 !important" buttontextcolour="#fff !important" buttonpadding="20px 20px !important" buttonmargin="10px 0px !important" buttonwidth="100% !important" buttontext="Register" errortextcolor="#fff !important"  customlink="/view-menu" customlinktext="View Menu"]`

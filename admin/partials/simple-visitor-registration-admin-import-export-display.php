@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Provide a admin area view for the plugin
+ * Provide a admin area view for the plugin where a user may download thier CSV, or empty the database
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
@@ -45,4 +45,11 @@ if ( ! defined( 'WPINC' ) ) die;
     <h2>Visitor Registration <?php esc_attr_e('Export', 'simple-visitor-registration' ); ?></h2> 
 
     <p style='display:flex;'><a href="<?php echo get_admin_url(); ?>admin.php?page=simple-visitor-registration&export_all_visitor_data"> <img src="<?php echo plugin_dir_url( __FILE__ ) . '../img/export.svg';?>" alt="download" width="22"> Export all visitor information</a></p>
+</div>
+
+<hr>
+
+<h4>Caution - pressing the following will remove all entries from your database</h4>
+<div class="wrap" style='margin-top:20px;'>
+	<button class='remove_entries' id="remove_visitor_entries" type="button">Delete all entries</button>
 </div>
