@@ -28,13 +28,17 @@ if ( ! defined( 'WPINC' ) ) die;
 
 <p>This can be achieved with shortcode attributes atrrbiutes. Here is an example shortcode with a custom link showing "View Menu" along side the "add a guest" link. `[visitor_registration_form customlink="/view-menu" customlinktext="View Menu"]`</p>
 
+<h4>Can I remove old entries from my database?</h4>
+
+<p>Of course! Head to the 'Export and Delete Entries' page in the admin section under 'Simple Visitor Registration' and press on the "Delete all entries" . <span style="color:red">A quick warning, this is permanant, so be sure to export and backup your entries before pressing this button.</span></p>
+
 <h4>How do I use the shortcode?</h4>
 
-<p>The shortcode to display form is `[visitor_registration_form]`. Place is the content of any post or page.</p>
+<p>The shortcode to display form is</p> <code>[visitor_registration_form]</code>. <p>Place this into the content of any post or page.</p>
 
-A complete version of the shortcode looks like the following:</p>
+A complete version of the shortcode looks like the following: These values are not required, they are offered to allow you to brand your form.</p>
 
-<code>`[visitor_registration_form fnametext="First Name" lnametext="Surname" emailtext="Email Address" phonetext="Phone Number" customfield1="Room Number" inputfieldbordertop="0px solid black !important" inputfieldborderleft="0px solid black !important" inputfieldborderright="0px solid black !important" inputfieldborderbottom="2px solid black !important" inputfieldwidth="100%" inputfieldtextcolour="#000 !important" inputfieldpadding="10px 20px !important" inputfieldmargin="10px 0px !important" buttoncolour="#000 !important" buttontextcolour="#fff !important" buttonpadding="20px 20px !important" buttonmargin="10px 0px !important" buttonwidth="100% !important" buttontext="Register" errortextcolor="#fff !important"  customlink="/view-menu" customlinktext="View Menu"]`</code>
+<code>[visitor_registration_form fnametext="First Name" lnametext="Surname" emailtext="Email Address" phonetext="Phone Number" customfield1="Room Number" inputfieldbordertop="0px solid black !important" inputfieldborderleft="0px solid black !important" inputfieldborderright="0px solid black !important" inputfieldborderbottom="2px solid black !important" inputfieldwidth="100%" inputfieldtextcolour="#000 !important" inputfieldpadding="10px 20px !important" inputfieldmargin="10px 0px !important" buttoncolour="#000 !important" buttontextcolour="#fff !important" buttonpadding="20px 20px !important" buttonmargin="10px 0px !important" buttonwidth="100% !important" buttontext="Register" errortextcolor="#fff !important"  customlink="/view-menu" customlinktext="View Menu"]</code>
 
 <h4>Style Customisation</h4>
  
@@ -63,7 +67,7 @@ buttonwidth - Button width css properties<br />
 errortextcolor - Error text color css properties<br />
 buttontext - Customise the Register Button Text<br />
 
-<h4>Add another field to form</h4>
+<h4>Add another field to your form</h4>
 
 
 customfield1 - Name of an optional extra field eg. roomNumber

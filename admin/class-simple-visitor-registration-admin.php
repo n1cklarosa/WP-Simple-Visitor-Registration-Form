@@ -175,7 +175,7 @@ class Simple_Visitor_Registration_Admin {
 	</g>
 </g></g> </svg>'));
 
-	    add_submenu_page( $this->plugin_name, 'Entries', 'Entries', 'manage_options', $this->plugin_name, array($this, 'display_plugin_import_export_page'));
+	    add_submenu_page( $this->plugin_name, 'Export and Delete Entries', 'Export and Delete Entries', 'manage_options', $this->plugin_name, array($this, 'display_plugin_import_export_page'));
 	    add_submenu_page( $this->plugin_name, 'Visitor Registration reCAPTCHA', 'Visitor Registration reCAPTCHA', 'manage_options', $this->plugin_name.'-captcha', array($this, 'display_plugin_captcha_setup_page')
 		);
 		add_submenu_page( $this->plugin_name, 'Help', 'Visitor Registration Help', 'manage_options', $this->plugin_name.'-help', array($this, 'display_plugin_help_page')

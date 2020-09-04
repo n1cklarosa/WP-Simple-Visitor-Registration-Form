@@ -13,9 +13,11 @@ Add a simple visitor registration form to any wordpress site.
 
 == Description ==
 
-There are loads of great full featured form plugins available for wordpress. Some take a little getting to know in order to get the most out of them. This plugin is not one of those, it is something simple to help physical venue's create a visitor registration form with the use of a single shortcode.
+There are loads of great full featured form plugins available for wordpress. Some take a little getting to know in order to get the most out of them. This plugin is not one of those, it is something simple to help physical venues create a visitor registration form with the use of a single shortcode.
 
 Once a patron of a venue has filled out the form, they have the option to add a new guest or visit a customisable link of the venue's choice. Entries can then be exported to CSV by the Wordpress administrator with exact date along side the details added into the form.
+
+Links to your form can be place at the entrance to a location as a requirement of entry.
 
 **Features**
 
@@ -40,6 +42,10 @@ Once the plugin has been activated, you will see a new admin section titled "Sim
 = How can I add another link to the confirmation page? =
 
 This can be achieved with shortcode attributes atrrbiutes. Here is an example shortcode with a custom link showing "View Menu" along side the "add a guest" link. `[visitor_registration_form customlink="/view-menu" customlinktext="View Menu"]`
+
+= Can I remove old entries from my database? =
+
+Of course! Head to the 'Export and Delete Entries' page in the admin section under 'Simple Visitor registration' and press on the "Delete all entries" buttons. A warning, this is permanant, so besure to export your entries before pressing this button.
 
 = How do I use the shortcode? =
 
