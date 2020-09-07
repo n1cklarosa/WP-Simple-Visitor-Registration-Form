@@ -251,11 +251,9 @@ class Simple_Visitor_Registration_Admin {
 	}
 
 	public function options_update() {
-
 	    register_setting( $this->plugin_name, $this->plugin_name, array(
 	       'sanitize_callback' => array( $this, 'validate' ),
-	    ) );
-
+	    ) ); 
 	} 
 
 }

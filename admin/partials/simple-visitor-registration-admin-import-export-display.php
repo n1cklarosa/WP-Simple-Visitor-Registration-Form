@@ -43,13 +43,12 @@ if ( ! defined( 'WPINC' ) ) die;
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="wrap">
     <h2>Visitor Registration <?php esc_attr_e('Export', 'simple-visitor-registration' ); ?></h2> 
-
-    <p style='display:flex;'><a href="<?php echo get_admin_url(); ?>admin.php?page=simple-visitor-registration&export_all_visitor_data"> <img src="<?php echo plugin_dir_url( __FILE__ ) . '../img/export.svg';?>" alt="download" width="22"> Export all visitor information</a></p>
+    <p style='display:flex;'><a href="<?php echo get_admin_url(); ?>admin.php?page=simple-visitor-registration&export_all_visitor_data"> <img src="<?php echo plugin_dir_url( __FILE__ ) . '../img/export.svg';?>" alt="download" width="22"> <?php esc_attr_e('Export all visitor information', 'simple-visitor-registration' ); ?> </a></p>
 </div>
 
 <hr>
 
-<h4>Caution - pressing the following will remove all entries from your database</h4>
+<h4><?php esc_attr_e('Caution - pressing the following will remove all entries from your database', 'simple-visitor-registration' ); ?></h4>
 <div class="wrap" style='margin-top:20px;'>
-	<button class='remove_entries' id="remove_visitor_entries" type="button">Delete all entries</button>
+	<button class='remove_entries' id="remove_visitor_entries" type="button"><?php esc_attr_e('Delete all entries', 'simple-visitor-registration' ); ?></button>
 </div>

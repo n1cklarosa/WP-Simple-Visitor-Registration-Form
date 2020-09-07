@@ -56,7 +56,14 @@ class Simple_Visitor_Registration_Shortcodes {
 				'customlinktext' => null
 	        ), $atts, 'show_stream_form' );
 
- 
+		// sanitize inputs
+
+
+		foreach ($atts as $key => $value) {
+			if($value !== null){
+				$atts[$key] = sanitize_text_field($atts[$key]);
+			}
+		}
 
   		global $post;
 		ob_start(); 
@@ -68,55 +75,55 @@ class Simple_Visitor_Registration_Shortcodes {
 
 		 <style>
 		 	#simplevisitorregistration-userdetails p {
-		 		color:<?php echo $atts['errorTextColor']; ?>;
+		 		color:<?php echo esc_attr($atts['errorTextColor']); ?>;
 		 	}
 		 	#simplevisitorregistration-userdetails label {
 		 		display:none;
 		 	}
 		 	#simplevisitorregistration-userdetails input[type=text], #simplevisitorregistration-userdetails input[type=email] {
-		 		color:<?php echo $atts['inputfieldtextcolor']; ?>;
-		 		padding:<?php echo $atts['inputfieldpadding']; ?>;
-		 		background-color:<?php echo $atts['inputfieldbackgroundcolor']; ?>;
-		 		margin:<?php echo $atts['inputfieldmargin']; ?>;
-		 		border-top:<?php echo $atts['inputfieldbordertop']; ?>;
-		 		border-right:<?php echo $atts['inputfieldborderright']; ?>;
-		 		border-left:<?php echo $atts['inputfieldborderleft']; ?>;
-		 		border-bottom:<?php echo $atts['inputfieldborderbottom']; ?>;
-		 		width:<?php echo $atts['inputfieldwidth']; ?>;
-		 		line-height:<?php echo $atts['inputfieldlineheight']; ?>;
-		 		font-size:<?php echo $atts['inputfieldfontsize']; ?>;
+		 		color:<?php echo esc_attr($atts['inputfieldtextcolor']); ?>;
+		 		padding:<?php echo esc_attr($atts['inputfieldpadding']); ?>;
+		 		background-color:<?php echo esc_attr($atts['inputfieldbackgroundcolor']); ?>;
+		 		margin:<?php echo esc_attr($atts['inputfieldmargin']); ?>;
+		 		border-top:<?php echo esc_attr($atts['inputfieldbordertop']); ?>;
+		 		border-right:<?php echo esc_attr($atts['inputfieldborderright']); ?>;
+		 		border-left:<?php echo esc_attr($atts['inputfieldborderleft']); ?>;
+		 		border-bottom:<?php echo esc_attr($atts['inputfieldborderbottom']); ?>;
+		 		width:<?php echo esc_attr($atts['inputfieldwidth']); ?>;
+		 		line-height:<?php echo esc_attr($atts['inputfieldlineheight']); ?>;
+		 		font-size:<?php echo esc_attr($atts['inputfieldfontsize']); ?>;
 		 	}
 		 	#simplevisitorregistration-userdetails input[type=submit], #simplevisitorregistration-userdetails button, .svr-reset-button {
-		 		color:<?php echo $atts['buttontextcolor']; ?>;
-		 		padding:<?php echo $atts['buttonpadding']; ?>;
-		 		margin:<?php echo $atts['buttonmargin']; ?>;
-		 		background-color:<?php echo $atts['buttoncolour']; ?>;
-		 		width:<?php echo $atts['buttonwidth']; ?>;
+		 		color:<?php echo esc_attr($atts['buttontextcolor']); ?>;
+		 		padding:<?php echo esc_attr($atts['buttonpadding']); ?>;
+		 		margin:<?php echo esc_attr($atts['buttonmargin']); ?>;
+		 		background-color:<?php echo esc_attr($atts['buttoncolour']); ?>;
+		 		width:<?php echo esc_attr($atts['buttonwidth']); ?>;
 		 	}
 		 </style>
 		 <div id="simplevisitorregistration-form-wrapper">
 			<form id="simplevisitorregistration-userdetails" action="login" method="post"  autocomplete="off">  
 			    <input type="hidden" id="post_id" value="<?php echo $post->ID; ?>">
 			    <div class="simplevisitorregistration-form-container">
-				    <label for="username"><?php echo $atts['fnametext']; ?></label>
-				    <input id="fname" type="text" name="fname" placeholder="<?php echo $atts['fnametext']; ?>"  autocomplete="off">
+				    <label for="username"><?php echo esc_attr($atts['fnametext']); ?></label>
+				    <input id="fname" type="text" name="fname" placeholder="<?php echo esc_attr($atts['fnametext']); ?>"  autocomplete="off">
 			    </div>
 			    <div class="simplevisitorregistration-form-container">
-				    <label for="password"><?php echo $atts['lnametext']; ?></label>
-				    <input id="lname" type="text" name="lname" placeholder="<?php echo $atts['lnametext']; ?>"  autocomplete="off">
+				    <label for="password"><?php echo esc_attr($atts['lnametext']); ?></label>
+				    <input id="lname" type="text" name="lname" placeholder="<?php echo esc_attr($atts['lnametext']); ?>"  autocomplete="off">
 			    </div> 
 			    <div class="simplevisitorregistration-form-container">
-				    <label for="email_address"><?php echo $atts['emailtext']; ?></label>
-				    <input id="email" type="email" name="email" placeholder="<?php echo $atts['emailtext']; ?>"  autocomplete="off">
+				    <label for="email_address"><?php echo esc_attr($atts['emailtext']); ?></label>
+				    <input id="email" type="email" name="email" placeholder="<?php echo esc_attr($atts['emailtext']); ?>"  autocomplete="off">
 			    </div> 
 			    <div class="simplevisitorregistration-form-container">
-				    <label for="phone"><?php echo $atts['phonetext']; ?></label>
-				    <input id="phone" type="text" name="phone" placeholder="<?php echo $atts['phonetext']; ?>"  autocomplete="off">
+				    <label for="phone"><?php echo esc_attr($atts['phonetext']); ?></label>
+				    <input id="phone" type="text" name="phone" placeholder="<?php echo esc_attr($atts['phonetext']); ?>"  autocomplete="off">
 			    </div> 
 			    <?php if($atts['customfield1'] != null): ?>
 				    <div class="simplevisitorregistration-form-container">
-					    <label for="cfield1"><?php echo $atts['customfield1']; ?></label>
-					    <input id="cfield1" type="text" name="cfield1" placeholder="<?php echo $atts['customfield1']; ?>"  autocomplete="off">
+					    <label for="cfield1"><?php echo esc_attr($atts['customfield1']); ?></label>
+					    <input id="cfield1" type="text" name="cfield1" placeholder="<?php echo esc_attr($atts['customfield1']); ?>"  autocomplete="off">
 				    </div> 
 			    <?php else: ?>
 			    	<input id="cfield1" type="hidden" name="cfield1"  value='null'>
@@ -124,7 +131,7 @@ class Simple_Visitor_Registration_Shortcodes {
 			    <p class="register-message"></p>
 			    <?php if($GOOGLE_CAPTCHA_SITE_KEY !== ''): ?>
 			    	<div class="g-recaptcha"
-			          data-sitekey="<?php echo $GOOGLE_CAPTCHA_SITE_KEY; ?>"
+			          data-sitekey="<?php echo esc_attr($GOOGLE_CAPTCHA_SITE_KEY); ?>"
 			          data-callback="onSubmit"
 			          data-size="invisible"></div> 
 			    <?php endif; ?>
@@ -136,7 +143,7 @@ class Simple_Visitor_Registration_Shortcodes {
 					</div>
 				</div> 
 				    <div class="simplevisitorregistration-form-container" style='margin-top:10px;'> 
-				        <input class="submit_button" type="submit" value="<?php echo $atts['buttontext']; ?>" id="visitor_submit" name="submit"> 
+				        <input class="submit_button" type="submit" value="<?php echo esc_attr($atts['buttontext']); ?>" id="visitor_submit" name="submit"> 
 				    </div> 
 			    <?php wp_nonce_field( VISITOR_REGISTRATION_NONCE, '_nonce' ); ?>
 			</form>
@@ -144,7 +151,7 @@ class Simple_Visitor_Registration_Shortcodes {
 			<div class="simplevisitorregistration-complete-div" style="display:none;">
 				<a href="<?php the_permalink(); ?>" class="svr-reset-button" style='margin-left:10px;margin-right:10px'>Add Guest</a>
 				<?php if(($atts['customlink'] != null) && ($atts['customlinktext'] != null)): ?>
-					<a class='svr-reset-button' href="<?php echo $atts['customlink']; ?>"><?php echo $atts['customlinktext']; ?></a>
+					<a class='svr-reset-button' href="<?php echo esc_attr($atts['customlink']); ?>"><?php echo esc_attr($atts['customlinktext']); ?></a>
 				<?php endif; ?>
 			</div>
 			 

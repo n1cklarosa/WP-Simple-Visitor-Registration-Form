@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Provide a admin area view for the plugin
+ * Provide a admin area view for the plugin's google recaptcha details
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
@@ -33,7 +33,6 @@ if($GOOGLE_CAPTCHA_SECRET_KEY = getenv('GOOGLE_CAPTCHA_SECRET_KEY')){
 
 ?>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="wrap">
     <h2>Google ReCaptcha <?php esc_attr_e('Options', 'simple-visitor-registration' ); ?></h2>
 
