@@ -105,16 +105,16 @@ class Simple_Visitor_Registration_Public {
  
         check_ajax_referer( VISITOR_REGISTRATION_NONCE, 'security' );
  
-		$fname = stripcslashes($_POST['fname']);
-		$lname = stripcslashes($_POST['lname']); 
-		$email = stripcslashes($_POST['email']); 
-		$custom1 = stripcslashes($_POST['cfield1']);  
-		$phone = stripcslashes($_POST['phone']);      
+		$fname = sanitize_text_field(stripcslashes($_POST['fname']));
+		$lname = sanitize_text_field(stripcslashes($_POST['lname'])); 
+		$email = sanitize_email(stripcslashes($_POST['email'])); 
+		$custom1 = sanitize_text_field(stripcslashes($_POST['cfield1']));  
+		$phone = sanitize_text_field(stripcslashes($_POST['phone']));     // Not sanitizes as a number as the user name want to use this as a plain text field  
 
 		if($GOOGLE_CAPTCHA_SITE_KEY = getenv('GOOGLE_CAPTCHA_SITE_KEY')){
   		} else {
   			$options = get_option( 'simple-visitor-registration' ); 
-  			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_attr( $options['google_captcha_site_key'] ) : '';
+  			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_option( $options['google_captcha_site_key'] ) : '';
   		}
 
   		// If there are google captcha values set, use them to ensure we have a valid capture response
@@ -130,7 +130,8 @@ class Simple_Visitor_Registration_Public {
   				echo json_encode(array('status'=>false, 'message'=>__('Looks like recaptcha has failed')));
 				die;
   			}
-  		} 
+		  } 
+		// ensure all feilds have SOMETHING in them - This is not meant to be a barrier for a physical venue so we will be simple in our validation here
 		if(strlen($fname) < 2):
 			echo json_encode(array('status'=>false, 'message'=>__('Please enter a valid first name')));
 			die;
@@ -145,7 +146,7 @@ class Simple_Visitor_Registration_Public {
 			die;
 		endif;
 
-		
+		// validating the email address
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 		    echo json_encode(array('status'=>false, 'message'=>__('Invalid Email Format')));
 			die();

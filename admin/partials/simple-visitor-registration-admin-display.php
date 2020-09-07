@@ -56,7 +56,7 @@ if($GOOGLE_CAPTCHA_SECRET_KEY = getenv('GOOGLE_CAPTCHA_SECRET_KEY')){
             <legend class="screen-reader-text">
                 <span><?php esc_attr_e( 'Site key', 'simple-visitor-registration' ); ?></span>
             </legend>
-            <input type="text" class="google_captcha_site_key" id="<?php echo $this->plugin_name; ?>-google_captcha_site_key" name="<?php echo $this->plugin_name; ?>[google_captcha_site_key]" value="<?php if( ! empty( $google_captcha_site_key ) ) echo $google_captcha_site_key; else echo ''; ?>"/ style='min-width:400px'>
+            <input type="text" class="google_captcha_site_key" id="<?php echo esc_attr($this->plugin_name); ?>-google_captcha_site_key" name="<?php echo esc_attr($this->plugin_name); ?>[google_captcha_site_key]" value="<?php if( ! empty( $google_captcha_site_key ) ) echo esc_attr($google_captcha_site_key); else echo ''; ?>"/ style='min-width:400px'>
         </fieldset>
     <?php else: ?>
         <p>Your site key is already configured via environment variables.</p>
@@ -68,7 +68,7 @@ if($GOOGLE_CAPTCHA_SECRET_KEY = getenv('GOOGLE_CAPTCHA_SECRET_KEY')){
             <legend class="screen-reader-text">
                 <span><?php esc_attr_e( 'Example Text', 'simple-visitor-registration' ); ?></span>
             </legend>
-            <input type="text" class="google_captcha_secret_key" id="<?php echo $this->plugin_name; ?>-google_captcha_secret_key" name="<?php echo $this->plugin_name; ?>[google_captcha_secret_key]" value="<?php if( ! empty( $google_captcha_secret_key ) ) echo $google_captcha_secret_key; else echo ''; ?>"/ style='min-width:400px'>
+            <input type="text" class="google_captcha_secret_key" id="<?php echo esc_attr($this->plugin_name); ?>-google_captcha_secret_key" name="<?php echo esc_attr($this->plugin_name); ?>[google_captcha_secret_key]" value="<?php if( ! empty( $google_captcha_secret_key ) ) echo esc_attr($google_captcha_secret_key); else echo ''; ?>"/ style='min-width:400px'>
         </fieldset>
     <?php else: ?>
         <p>Your secret key is already configured via environment variables.</p>

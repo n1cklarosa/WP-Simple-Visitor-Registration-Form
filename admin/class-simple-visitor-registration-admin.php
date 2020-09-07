@@ -60,9 +60,8 @@ class Simple_Visitor_Registration_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
- 
-		wp_register_style( 'jquery-ui-styles','https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' );
-		wp_enqueue_style( 'jquery-ui-styles' );
+  
+		// wp_enqueue_style( 'jquery-ui' );
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/simple-visitor-registration-admin.css', array(), $this->version, 'all' );
 
 	}
@@ -244,8 +243,8 @@ class Simple_Visitor_Registration_Admin {
 
 	    $valid = array();
  
-	    $valid['google_captcha_secret_key'] = ( isset( $input['google_captcha_secret_key'] ) && ! empty( $input['google_captcha_secret_key'] ) ) ? esc_attr( $input['google_captcha_secret_key'] ) : '';
-	    $valid['google_captcha_site_key'] = ( isset( $input['google_captcha_site_key'] ) && ! empty( $input['google_captcha_site_key'] ) ) ? esc_attr( $input['google_captcha_site_key'] ) : '';
+	    $valid['google_captcha_secret_key'] = ( isset( $input['google_captcha_secret_key'] ) && ! empty( $input['google_captcha_secret_key'] ) ) ? esc_attr( sanitize_text_field( $input['google_captcha_secret_key'] )) : '';
+	    $valid['google_captcha_site_key'] = ( isset( $input['google_captcha_site_key'] ) && ! empty( $input['google_captcha_site_key'] ) ) ? esc_attr( sanitize_text_field( $input['google_captcha_site_key'] )) : '';
  
 	    return $valid; 
 
