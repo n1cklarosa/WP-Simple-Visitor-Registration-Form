@@ -114,7 +114,7 @@ class Simple_Visitor_Registration_Public {
 		if($GOOGLE_CAPTCHA_SITE_KEY = getenv('GOOGLE_CAPTCHA_SITE_KEY')){
   		} else {
   			$options = get_option( 'simple-visitor-registration' ); 
-  			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ? esc_option( $options['google_captcha_site_key'] ) : '';
+  			$GOOGLE_CAPTCHA_SITE_KEY = ( isset( $options['google_captcha_site_key'] ) && ! empty( $options['google_captcha_site_key'] ) ) ?  $options['google_captcha_site_key']  : '';
   		}
 
   		// If there are google captcha values set, use them to ensure we have a valid capture response
@@ -212,8 +212,7 @@ class Simple_Visitor_Registration_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function verify_captcha(){
-
+	public function verify_captcha(){ 
 
 		if($GOOGLE_CAPTCHA_SECRET_KEY = getenv('GOOGLE_CAPTCHA_SECRET_KEY')){
 		} else { 
@@ -221,24 +220,22 @@ class Simple_Visitor_Registration_Public {
 		    $GOOGLE_CAPTCHA_SECRET_KEY = ( isset( $options['google_captcha_secret_key'] ) && ! empty( $options['google_captcha_secret_key'] ) ) ? esc_attr( $options['google_captcha_secret_key'] ) : ''; 
 		}
 
-		$post_data = http_build_query(
-		    array(
-		        'secret' => $GOOGLE_CAPTCHA_SECRET_KEY,
-		        'response' => $_POST['g-recaptcha-response'],
-		        'remoteip' => $_SERVER['REMOTE_ADDR']
-		    )
-		);
-		$opts = array('http' =>
-		    array(
+		$post_data =  array(
+						'secret' => $GOOGLE_CAPTCHA_SECRET_KEY,
+						'response' => $_POST['g-recaptcha-response'],
+						'remoteip' => $_SERVER['REMOTE_ADDR']
+					);
+		$args = array(
 		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => $post_data
-		    )
-		);
+		        'HEADERS'  => ['Content-type: application/x-www-form-urlencoded'],
+		        'body' => $post_data
+			); 
+			
+		$response = wp_remote_post( 'https://www.google.com/recaptcha/api/siteverify', $args );
+		$body     = wp_remote_retrieve_body( $response );
 
-		$context  = stream_context_create($opts);
-		$response = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context);
-		$result = json_decode($response);
+		$result = json_decode($body);
+ 
 		if (!$result->success) {
 		    throw new Exception('Oops! CAPTCHA verification failed. Please let one of our staff know that something is wrong here', 1);
 		} else {
