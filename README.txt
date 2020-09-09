@@ -1,11 +1,11 @@
 === Simple Visitor Registration Form ===
 Contributors: nicklarosa
 Donate link: https://nicklarosa.net
-Tags: registration
+Tags: registration, form
 Requires at least: 5.0
 Tested up to: 5.5
-Stable tag: 5.3
-Requires PH: 7.0
+Stable tag: 1.0.0
+Requires PHP: 7.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,10 @@ If you want to contribute to Simple Visitor Registration Form, you can [fork the
 
 Upload the Simple Visitor Registration Form plugin to your wordpress website, activate it, and then use the shortcode to build your registraion form.
 
+== Screenshots ==
+
+1. Example of form working in TwentyTwenty theme
+
 == Frequently Asked Questions ==
 
 = How do I enable Google ReCaptcha? =
@@ -54,3 +58,13 @@ The shortcode to display form is `[visitor_registration_form]`. Place is the con
 A complete version of the shortcode looks like the following:
 
 `[visitor_registration_form fnametext="First Name" lnametext="Surname" emailtext="Email Address" phonetext="Phone Number" customfield1="Room Number" inputfieldbordertop="0px solid black !important" inputfieldborderleft="0px solid black !important" inputfieldborderright="0px solid black !important" inputfieldborderbottom="2px solid black !important" inputfieldwidth="100%" inputfieldtextcolour="#000 !important" inputfieldpadding="10px 20px !important" inputfieldmargin="10px 0px !important" buttoncolour="#000 !important" buttontextcolour="#fff !important" buttonpadding="20px 20px !important" buttonmargin="10px 0px !important" buttonwidth="100% !important" buttontext="Register" errortextcolor="#fff !important"  customlink="/view-menu" customlinktext="View Menu"]`
+
+== Changelog ==
+
+= 1.0.0 =
+* First publicly available version.
+
+== Upgrade Notice ==
+
+= 1.0.0 =
+* First publicly available version.
