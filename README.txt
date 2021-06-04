@@ -3,8 +3,8 @@ Contributors: nicklarosa
 Donate link: https://nicklarosa.net
 Tags: registration, form
 Requires at least: 5.0
-Tested up to: 5.5
-Stable tag: 1.0.0
+Tested up to: 5.7
+Stable tag: 1.0.1
 Requires PHP: 7.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -61,10 +61,16 @@ A complete version of the shortcode looks like the following:
 
 == Changelog ==
 
+= 1.0.1 =
+* Fixed a bug when not using recaptcha field
+
 = 1.0.0 =
 * First publicly available version.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+* Fixed a bug when not using recaptcha field
 
 = 1.0.0 =
 * First publicly available version.
